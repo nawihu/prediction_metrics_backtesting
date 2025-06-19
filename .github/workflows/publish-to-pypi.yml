@@ -8,13 +8,14 @@ on:
 jobs:
   build-and-publish:
     runs-on: ubuntu-latest
-    environment: pypi  # Use the environment you're creating
+    environment: pypi  # Make sure this environment exists in your repo settings
     permissions:
-      id-token: write # <--- ADDED THIS LINE!
-      contents: read  # It's good practice to include this for checkout
+      id-token: write  # Required for trusted publishing
+      contents: read   # Required for checkout
 
     steps:
-    - uses: actions/checkout@v4
+    - name: Checkout code
+      uses: actions/checkout@v4
 
     - name: Set up Python
       uses: actions/setup-python@v4
@@ -32,5 +33,10 @@ jobs:
     - name: Check distribution
       run: twine check dist/*
 
+    - name: List distribution files
+      run: ls -la dist/
+
     - name: Publish to PyPI
       uses: pypa/gh-action-pypi-publish@release/v1
+      with:
+        verbose: true  # Enable verbose output for debugging
