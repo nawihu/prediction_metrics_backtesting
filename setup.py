@@ -1,6 +1,9 @@
 from setuptools import setup, find_packages
+import os
 
-with open("README.md", "r", encoding="utf-8") as fh:
+# Read the README file
+here = os.path.abspath(os.path.dirname(__file__))
+with open(os.path.join(here, "README.md"), "r", encoding="utf-8") as fh:
     long_description = fh.read()
 
 setup(
@@ -12,14 +15,26 @@ setup(
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/nawihu/prediction-metrics-backtester",
-    packages=find_packages(),
+    project_urls={
+        "Bug Reports": "https://github.com/nawihu/prediction-metrics-backtester/issues",
+        "Source": "https://github.com/nawihu/prediction-metrics-backtester",
+        "Documentation": "https://github.com/nawihu/prediction-metrics-backtester/wiki",
+    },
+    # Instead of find_packages(), explicitly specify the module
+    py_modules=["prediction_metrics_backtesting"],
     classifiers=[
-        "Programming Language :: Python :: 3",
+        "Development Status :: 4 - Beta",
+        "Intended Audience :: Financial and Insurance Industry",
+        "Topic :: Office/Business :: Financial :: Investment",
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
-        "Topic :: Office/Business :: Financial :: Investment",
-        "Intended Audience :: Financial and Insurance Industry",
-        "Development Status :: 4 - Beta",
+        "Programming Language :: Python :: 3",
+        "Programming Language :: Python :: 3.7",
+        "Programming Language :: Python :: 3.8",
+        "Programming Language :: Python :: 3.9",
+        "Programming Language :: Python :: 3.10",
+        "Programming Language :: Python :: 3.11",
+        "Programming Language :: Python :: 3.12",
     ],
     python_requires=">=3.7",
     install_requires=[
@@ -33,4 +48,7 @@ setup(
             "prediction-metrics-backtest=prediction_metrics_backtesting:main",
         ],
     },
+    keywords="backtesting trading finance prediction metrics strategy",
+    include_package_data=True,
+    zip_safe=False,
 )
