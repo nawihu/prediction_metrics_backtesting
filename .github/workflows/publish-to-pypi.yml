@@ -3,15 +3,16 @@ name: Publish to PyPI
 on:
   release:
     types: [published]
-  workflow_dispatch: 
+  workflow_dispatch:  # Allow manual triggering
 
 jobs:
   build-and-publish:
     runs-on: ubuntu-latest
-    environment: pypi  
+    environment: pypi  # Use the environment you're creating
     permissions:
-      id-token: write 
-      contents: read  
+      id-token: write # <--- ADDED THIS LINE!
+      contents: read  # It's good practice to include this for checkout
+
     steps:
     - uses: actions/checkout@v4
 
